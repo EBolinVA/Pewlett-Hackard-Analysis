@@ -144,3 +144,32 @@ LEFT JOIN dept_emp as de
 ON ce.emp_no = de.emp_no
 GROUP BY de.dept_no
 ORDER BY de.dept_no;
+
+--
+
+
+-- Retirement eligible employees in Sales Department
+SELECT ri.emp_no,
+	ri.first_name,
+	ri.last_name,
+	d.dept_name
+INTO sales_info
+FROM retirement_info As ri
+LEFT JOIN dept_emp As de
+ON ri.emp_no = de.emp_no
+LEFT JOIN departments As d
+ON de.dept_no = d.dept_no
+WHERE d.dept_name = 'Sales';
+
+-- Create a table with retirement eligible employees in Sales and Development
+SELECT ri.emp_no,
+	ri.first_name,
+	ri.last_name,
+	d.dept_name
+INTO combined_sales_dev_info
+FROM retirement_info As ri
+LEFT JOIN dept_emp As de
+ON ri.emp_no = de.emp_no
+LEFT JOIN departments As d
+ON de.dept_no = d.dept_no
+WHERE d.dept_name IN ('Sales', 'Development');
