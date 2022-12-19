@@ -2,14 +2,14 @@
 
 
 ## :book: Table of Contents
-1. About the Project
-2. Prerequisites
-3. Dataset
-4. Queries
+1. [About the Project](#about)
+2. [Prerequisites](#prerequisites)
+3. [Dataset](#dataset)
+4. Queries(#queries)
 5. Results and Discussion
 6. Recommendations
 
-## :memo: About the Project
+## :memo: About the Project <a name="about"></a>
 This project uses SQL to query employee data for Pewlett Hackard. They anticipate a changing workforce and want to forecast retirements and employment needs. Many job openings are imminent due to baby boomers in the workforce retiring. Our data analysis goal is to forecast the departments and positions that will need filling, and also find the group of junior employees who can be mentored into new roles. 
 
 Working with an original data set of 6 .csv files holding employee, department, manager, title, and salary information, the first task is to create an entity relationship diagram (ERD) to understand the schema of the database we are building. 
@@ -20,14 +20,14 @@ The next task is to join and create new tables in a relational database with mor
 
 [schema.sql file](https://github.com/EBolinVA/Pewlett-Hackard-Analysis/blob/main/schema.sql): Creating tables to load the original data for our database using PostgreSQL in pgAdmin4.
 
-## :briefcase: Prerequisites
+## :briefcase: Prerequisites <a name="prerequisites></a>
 
 The following open source packages are used in this project:
 - QuickDBD
 - ![image](https://img.shields.io/badge/PostgreSQL-316192?style=for-the-badge&logo=postgresql&logoColor=white)
 - pgAdmin 4 
 
-## :floppy_disk: Dataset
+## :floppy_disk: Dataset <a name="dataset"></a>
 
 The dataset includes human resources information obtained from Pewlett Hackard and consists of six original .csv files:
 - employees
@@ -37,9 +37,10 @@ The dataset includes human resources information obtained from Pewlett Hackard a
 - salaries
 - titles
 
-## Queries
+## Queries <a name="queries"></a>
 
-## :chart_with_upwards_trend: Results and Discussion
+
+
 
 First we need determined the number of retiring employees per job title. The employees.csv file holds over 300,000 records with employee number (emp_no), birth date, name, gender and hire date. 
 
@@ -65,5 +66,8 @@ Setting the to_date to January 1, 9999, ensures that the query returns only reti
 [image]
 
 Finally, 
+
+## :chart_with_upwards_trend: Results and Discussion
+
 
 ## Recommendations
