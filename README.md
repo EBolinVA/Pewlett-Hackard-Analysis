@@ -9,7 +9,7 @@
 5. Results and Discussion
 6. Recommendations
 
-## About the Project
+## :memo: About the Project
 This project uses SQL to query employee data for Pewlett Hackard. They anticipate a changing workforce and want to forecast retirements and employment needs. Many job openings are imminent due to baby boomers in the workforce retiring. Our data analysis goal is to forecast the departments and positions that will need filling, and also find the group of junior employees who can be mentored into new roles. 
 
 Working with an original data set of 6 .csv files holding employee, department, manager, title, and salary information, the first task is to create an entity relationship diagram (ERD) to understand the schema of the database we are building. 
@@ -20,13 +20,14 @@ The next task is to join and create new tables in a relational database with mor
 
 [schema.sql file](https://github.com/EBolinVA/Pewlett-Hackard-Analysis/blob/main/schema.sql): Creating tables to load the original data for our database using PostgreSQL in pgAdmin4.
 
-## Prerequisites
+## :briefcase: Prerequisites
+
 The following open source packages are used in this project:
 - QuickDBD
-- PostgreSQL
+- ![image](https://img.shields.io/badge/PostgreSQL-316192?style=for-the-badge&logo=postgresql&logoColor=white)
 - pgAdmin 4 
 
-## Dataset
+## :floppy_disk: Dataset
 
 The dataset includes human resources information obtained from Pewlett Hackard and consists of six original .csv files:
 - employees
