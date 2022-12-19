@@ -166,7 +166,7 @@ SELECT ri.emp_no,
 	ri.first_name,
 	ri.last_name,
 	d.dept_name
-INTO combined_sales_dev_info
+--INTO combined_sales_dev_info
 FROM retirement_info As ri
 LEFT JOIN dept_emp As de
 ON ri.emp_no = de.emp_no

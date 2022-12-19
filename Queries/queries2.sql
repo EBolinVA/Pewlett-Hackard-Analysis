@@ -4,7 +4,7 @@ SELECT e.emp_no,
 	t.title,
 	t.from_date,
 	t.to_date
-INTO retirement_titles
+--INTO retirement_titles
 FROM employees As e
 INNER JOIN titles As t
 ON e.emp_no = t.emp_no
@@ -18,7 +18,7 @@ SELECT DISTINCT ON (rt.emp_no) rt.emp_no,
     rt.last_name,
     rt.title
 
-INTO unique_titles
+--INTO unique_titles
 FROM retirement_titles As rt
 WHERE rt.to_date = '9999-01-01'
 ORDER BY rt.emp_no, rt.title DESC;
@@ -27,7 +27,7 @@ ORDER BY rt.emp_no, rt.title DESC;
 -- job title who are about to retire.
 SELECT COUNT(ut.title) As title_count,
 	ut.title
-INTO retiring_titles
+--INTO retiring_titles
 FROM unique_titles As ut
 GROUP BY ut.title
 ORDER BY title_count DESC;
