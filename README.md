@@ -5,9 +5,9 @@
 1. [About the Project](#about)
 2. [Prerequisites](#prerequisites)
 3. [Dataset](#dataset)
-4. Queries(#queries)
-5. Results and Discussion
-6. Recommendations
+4. [Queries](#queries)
+5. [Results and Discussion](#results)
+6. [Recommendations](#recommendations)
 
 ## :memo: About the Project <a name="about"></a>
 This project uses SQL to query employee data for Pewlett Hackard. They anticipate a changing workforce and want to forecast retirements and employment needs. Many job openings are imminent due to baby boomers in the workforce retiring. Our data analysis goal is to forecast the departments and positions that will need filling, and also find the group of junior employees who can be mentored into new roles. 
@@ -67,7 +67,8 @@ Setting the to_date to January 1, 9999, ensures that the query returns only reti
 
 Finally, 
 
-## :chart_with_upwards_trend: Results and Discussion
+## :chart_with_upwards_trend: Results and Discussion <a name="results"></a>
 
 
-## Recommendations
+
+## Recommendations <a name="recommendations"></a>
