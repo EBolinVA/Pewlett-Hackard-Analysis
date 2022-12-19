@@ -69,6 +69,8 @@ Finally,
 
 ## :chart_with_upwards_trend: Results and Discussion <a name="results"></a>
 
+![retiring_titles_piechart image](https://github.com/EBolinVA/Pewlett-Hackard-Analysis/blob/main/retiring_titles_piechart.png)
 
+![mentorship_titles_piechart image](https://github.com/EBolinVA/Pewlett-Hackard-Analysis/blob/main/mentorship_titles_piechart.png)
 
 ## Recommendations <a name="recommendations"></a>
