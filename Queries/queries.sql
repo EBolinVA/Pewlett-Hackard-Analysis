@@ -90,7 +90,7 @@ WHERE (birth_date BETWEEN '1952-01-01' AND '1955-12-31')
 AND (hire_date BETWEEN '1985-01-01' AND '1988-12-31');
 
 SELECT first_name, last_name
-INTO retirement_info
+-- INTO retirement_info
 FROM employees
 WHERE (birth_date BETWEEN '1952-01-01' AND '1955-12-31')
 AND (hire_date BETWEEN '1985-01-01' AND '1988-12-31');
@@ -101,7 +101,7 @@ DROP TABLE retirement_info;
 
 --Create new table for retiring employees
 SELECT emp_no, first_name, last_name
-INTO retirement_info
+--INTO retirement_info
 FROM employees
 WHERE (birth_date BETWEEN '1952-01-01' AND '1955-12-31')
 AND (hire_date BETWEEN '1985-01-01' AND '1988-12-31');
@@ -138,7 +138,7 @@ WHERE de.to_date = ('9999-01-01');
 
 -- Employee count by department number
 SELECT COUNT(ce.emp_no), de.dept_no
-INTO current_dept
+--INTO current_dept
 FROM current_emp as ce
 LEFT JOIN dept_emp as de
 ON ce.emp_no = de.emp_no
@@ -153,7 +153,7 @@ SELECT ri.emp_no,
 	ri.first_name,
 	ri.last_name,
 	d.dept_name
-INTO sales_info
+-- INTO sales_info
 FROM retirement_info As ri
 LEFT JOIN dept_emp As de
 ON ri.emp_no = de.emp_no
@@ -240,3 +240,27 @@ SELECT COUNT(me.title) As title_count,
 FROM mentorship_eligibility As me
 GROUP BY me.title
 ORDER BY title_count DESC;
+
+-- Get total number of current employees still actively employed
+SELECT DISTINCT ON (emp_no) emp_no,
+	to_date
+FROM titles
+WHERE (to_date='9999-01-01')
+ORDER BY emp_no, to_date DESC;
+
+-- 12-20-22 Re-do Lesson 7.3.5 to get emp_info file
+SELECT e.emp_no, 
+	e.first_name, 
+	e.last_name,
+	e.gender,
+	s.salary,
+	de.to_date
+--INTO emp_info
+FROM employees As e
+INNER JOIN salaries As s
+ON (e.emp_no = s.emp_no)
+INNER JOIN dept_emp As de
+ON (e.emp_no = de.emp_no)
+WHERE (e.birth_date BETWEEN '1952-01-01' AND '1955-12-31')
+AND (e.hire_date BETWEEN '1985-01-01' AND '1988-12-31')
+AND (de.to_date = '9999-01-01');

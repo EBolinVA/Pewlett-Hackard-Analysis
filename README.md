@@ -67,7 +67,7 @@ Finally,
 
 ## :warning: Results and Discussion <a name="results"></a>
 * 240,124 Pewlett Hackard current employees 
-* 72,458 employees eligible to retire
+* 72,458 employees eligible to retire; 33,118 have at least 30 years of service
 * 1,549 employees eligible for mentorship
 * 30% reduction of workforce imminent due to retirement
 
