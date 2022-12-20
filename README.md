@@ -65,8 +65,18 @@ Setting the to_date to January 1, 9999, ensures that the query returns only reti
 
 Finally, 
 
-## :chart_with_upwards_trend: Results and Discussion <a name="results"></a>
+## :warning: Results and Discussion <a name="results"></a>
+* 240,124 Pewlett Hackard current employees 
+* 72,458 employees eligible to retire
+* 1,549 employees eligible for mentorship
+* 30% reduction of workforce imminent due to retirement
+
+![image of barchart showing numbers of employees eligible to retire next to numbers of current employees eligible for mentorship](https://github.com/EBolinVA/Pewlett-Hackard-Analysis/blob/main/retiring_vs_mentorship_barchart.png)
 
 
 
 ## Recommendations <a name="recommendations"></a>
+
+- Employees eligible to retire are born between 1952 and 1955. 
+
+- Employees eligible for mentorship are born in 1965. In order to expand the pool of employees to fill senior leadership, it is recommended to widen the range of employees by including more birth years and consider years of service.

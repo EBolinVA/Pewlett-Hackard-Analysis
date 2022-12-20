@@ -1,8 +1,10 @@
-title_count,title
-25916,Senior Engineer
-24926,Senior Staff
-9285,Engineer
-7636,Staff
-3603,Technique Leader
-1090,Assistant Engineer
-2,Manager
+Sum of title_count2,Column Labels,,
+Row Labels,Mentorship,Retiring,Grand Total
+Assistant Engineer,78,1090,1168
+Engineer,501,9285,9786
+Manager,,2,2
+Senior Engineer,169,25916,26085
+Senior Staff,569,24926,25495
+Staff,155,7636,7791
+Technique Leader,77,3603,3680
+Grand Total,1549,72458,74007
