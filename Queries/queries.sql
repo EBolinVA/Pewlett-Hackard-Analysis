@@ -264,3 +264,41 @@ ON (e.emp_no = de.emp_no)
 WHERE (e.birth_date BETWEEN '1952-01-01' AND '1955-12-31')
 AND (e.hire_date BETWEEN '1985-01-01' AND '1988-12-31')
 AND (de.to_date = '9999-01-01');
+
+--ADD hire_date to unique_titles to see if that narrows it down more
+SELECT ut.emp_no, e.hire_date
+FROM unique_titles As ut
+INNER JOIN employees As e
+ON (ut.emp_no = e.emp_no)
+WHERE (e.hire_date BETWEEN '1985-01-01' AND '1988-12-31')
+ORDER BY ut.emp_no, e.hire_date DESC;
+
+-- Deliverable 3, expand mentorship numbers by expanding birth years
+SELECT DISTINCT ON(e.emp_no) e.emp_no,
+	e.first_name, 
+	e.last_name, 
+	e.birth_date,
+	de.from_date,
+	de.to_date,
+	t.title
+--INTO mentorship_eligibility
+FROM employees As e
+LEFT JOIN dept_emp As de
+ON e.emp_no = de.emp_no
+LEFT JOIN titles As t
+ON e.emp_no = t.emp_no
+GROUP BY e.emp_no, de.from_date, de.to_date, e.birth_date, t.title
+HAVING (de.to_date = '9999-01-01') 
+	AND (e.birth_date BETWEEN '1965-01-01' AND '1975-12-31')
+ORDER BY e.emp_no;
+
+--just birthdates
+SELECT e.emp_no,
+	e.birth_date
+FROM employees As e
+GROUP BY e.emp_no
+HAVING (e.birth_date BETWEEN '1965-01-01' AND '1975-12-31')
+;
+
+
+-- Deliverable 3, expand mentorship numbers by considering length of service
