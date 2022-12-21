@@ -37,10 +37,8 @@ The dataset includes human resources information obtained from Pewlett Hackard a
 - salaries
 - titles
 
-## Queries <a name="queries"></a>
+## :question: Queries <a name="queries"></a>
 - How many are  eligible to retire?
-
-
 
 First we need determined the number of retiring employees per job title. The employees.csv file holds over 300,000 records with employee number (emp_no), birth date, name, gender and hire date. 
 
@@ -49,21 +47,38 @@ First we need determined the number of retiring employees per job title. The emp
 
 SELECT first_name, last_name
 FROM employees
-WHERE (birth_date BETWEEN '1952-01-01' AND '1955-12-31')
-AND (hire_date BETWEEN '1985-01-01' AND '1988-12-31');
+WHERE (birth_date BETWEEN '1952-01-01' AND '1955-12-31');
 ```
 
-The above query did not take into consideration the to_date, which is the date that indicates whether an employee is still currently working at Pewlett Hackard. The next query includes the line of code:
+The above query did not take into consideration the to_date, which is the date that indicates whether an employee is still currently working at Pewlett Hackard. The 'to_date' column is found in the original dept_emp.csv file. The next query includes the line of code:
 
 ```
 WHERE de.to_date = ('9999-01-01');
 ```
 
-Setting the to_date to January 1, 9999, ensures that the query returns only retirement eligible employees who are still on the payroll. This results in narrowing down the list of retirement eligible employees to 33,118.
+Setting the to_date to January 1, 9999, ensures that the query returns only retirement eligible employees who are still on the payroll. This results in narrowing down the list of retirement eligible employees to 72,458.
 
-[image]
+- How many employees are eligible for mentorship?
 
-Finally, 
+```
+SELECT DISTINCT ON(e.emp_no) e.emp_no,
+	e.first_name, 
+	e.last_name, 
+	e.birth_date,
+	de.from_date,
+	de.to_date,
+	t.title
+--INTO mentorship_eligibility
+FROM employees As e
+LEFT JOIN dept_emp As de
+ON e.emp_no = de.emp_no
+LEFT JOIN titles As t
+ON e.emp_no = t.emp_no
+GROUP BY e.emp_no, de.from_date, de.to_date, e.birth_date, t.title
+HAVING (de.to_date = '9999-01-01') 
+	AND (e.birth_date BETWEEN '1965-01-01' AND '1965-12-31')
+ORDER BY e.emp_no;
+```
 
 ## :warning: Results and Discussion <a name="results"></a>
 * 240,124 Pewlett Hackard current employees 
@@ -75,8 +90,39 @@ Finally,
 
 
 
-## Recommendations <a name="recommendations"></a>
+## :ocean: Summary and Recommendations <a name="recommendations"></a>
+The impending "silver tsunami" requires some planning to fill upcoming vacant positions. There are two main questions this analysis set out to address: the number of retiring employees and the number of those ready for mentorships.
 
-- Employees eligible to retire are born between 1952 and 1955. 
+### * How many employees are currently eligible to retire?
 
-- Employees eligible for mentorship are born in 1965. In order to expand the pool of employees to fill senior leadership, it is recommended to widen the range of employees by including more birth years and consider years of service.
+- It is unknown the date of this data pull for Pewlett Hackard. The analysis is done 4Q2022. 
+
+- The titles.csv file contains records for 240,124 unique current employees: 
+
+- Employees eligible for mentorship are born in 1965. Expand the pool of employees in mentorship to fill senior leadership: 
+    - widen the range of employees by including more birth years
+        - Note: there are no employees in the database with a birth_date more recent than 1965-12-31
+        - A query of current employees NOT born between 1962-1965 (retirement age) is done with the following code and results in 183,265 employee records:
+        ```
+        SELECT DISTINCT ON(e.emp_no) e.emp_no,
+	        e.first_name, 
+	        e.last_name, 
+	        e.birth_date,
+	        e.hire_date,
+	        de.from_date,
+	        de.to_date, 
+	        t.title
+        --INTO mentorship_eligibility
+        FROM employees As e
+        LEFT JOIN dept_emp As de
+        ON e.emp_no = de.emp_no
+        INNER JOIN titles As t
+        ON e.emp_no = t.emp_no
+        GROUP BY e.emp_no, e.hire_date, de.from_date, de.to_date, e.birth_date, t.title
+        HAVING (de.to_date = '9999-01-01') AND (e.birth_date NOT BETWEEN '1962-01-01' AND '1965-12-31')
+        ORDER BY e.emp_no;
+        ```
+
+        ![image of query for birthdates](https://github.com/EBolinVA/Pewlett-Hackard-Analysis/blob/main/Birthdates_after_1965.png)
+
+    - choose mentorship by years of service

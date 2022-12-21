@@ -292,13 +292,31 @@ HAVING (de.to_date = '9999-01-01')
 	AND (e.birth_date BETWEEN '1965-01-01' AND '1975-12-31')
 ORDER BY e.emp_no;
 
---just birthdates
+--just birthdates after 1965, resulting in no records
 SELECT e.emp_no,
 	e.birth_date
 FROM employees As e
 GROUP BY e.emp_no
-HAVING (e.birth_date BETWEEN '1965-01-01' AND '1975-12-31')
+HAVING (e.birth_date > '1965-12-31')
 ;
 
-
 -- Deliverable 3, expand mentorship numbers by considering length of service
+-- by combining employees emp_no and hire_date with dept_emp.emp_no and to_date
+SELECT DISTINCT ON(e.emp_no) e.emp_no,
+	e.first_name, 
+	e.last_name, 
+	e.birth_date,
+	e.hire_date,
+	de.from_date,
+	de.to_date, 
+	t.title
+--INTO mentorship_eligibility
+FROM employees As e
+LEFT JOIN dept_emp As de
+ON e.emp_no = de.emp_no
+INNER JOIN titles As t
+ON e.emp_no = t.emp_no
+GROUP BY e.emp_no, e.hire_date, de.from_date, de.to_date, e.birth_date, t.title
+HAVING (de.to_date = '9999-01-01') AND (e.birth_date NOT BETWEEN '1962-01-01' AND '1965-12-31')
+ORDER BY e.emp_no;
+
