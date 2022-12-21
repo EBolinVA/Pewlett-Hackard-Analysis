@@ -29,7 +29,7 @@ The following open source packages are used in this project:
 
 ## :floppy_disk: Dataset <a name="dataset"></a>
 
-The dataset includes human resources information obtained from Pewlett Hackard and consists of six original .csv files:
+The dataset includes human resources information obtained from Pewlett Hackard in December 2022, and consists of six original .csv files:
 - employees
 - departments
 - dept_manager
@@ -96,40 +96,40 @@ The impending "silver tsunami" requires some planning to fill upcoming vacant po
 ### * How many employees are currently eligible to retire?
 
 - 72,458 employees are currently eligible to retire:
-![image of query and results for retirement eligible employees]()
+    - Join titles, dept_emp, and employees file to obtain current employees eligible to retire by birthdate between 1952 and 1955.
 
-- It is unknown the date of this data pull for Pewlett Hackard. The analysis is done 4Q2022. 
+![image of query and results for retirement eligible employees](https://github.com/EBolinVA/Pewlett-Hackard-Analysis/blob/main/emp_eligible_to_retire.png) 
 
-- The titles.csv file contains records for 240,124 unique current employees.
-
-- Join titles, dept_emp, and employees file to obtain current employees eligible to retire by birthdate between 1952 and 1955.
-
+- There are 240,124 total employees. 30% (72,458) of Pewlett Hackard's workforce are about to retire. 
 
 ### * How many employees are currently eligible for mentorship?
-- Employees eligible for mentorship are born in 1965. Expand the pool of employees in mentorship to fill senior leadership: 
-    - widen the range of employees by including more birth years
-        - Note: there are no employees in the database with a birth_date more recent than 1965-12-31
-        - A query of current employees NOT born between 1962-1965 (retirement age) is done with the following code and results in 183,265 employee records:
-        ```
-        SELECT DISTINCT ON(e.emp_no) e.emp_no,
-	        e.first_name, 
-	        e.last_name, 
-	        e.birth_date,
-	        e.hire_date,
-	        de.from_date,
-	        de.to_date, 
-	        t.title
-        --INTO mentorship_eligibility
-        FROM employees As e
-        LEFT JOIN dept_emp As de
-        ON e.emp_no = de.emp_no
-        INNER JOIN titles As t
-        ON e.emp_no = t.emp_no
-        GROUP BY e.emp_no, e.hire_date, de.from_date, de.to_date, e.birth_date, t.title
-        HAVING (de.to_date = '9999-01-01') AND (e.birth_date NOT BETWEEN '1962-01-01' AND '1965-12-31')
-        ORDER BY e.emp_no;
-        ```
+- 1,549 employees are eligible for mentorship based on birth_date in 1965. Expand the pool of employees in mentorship to fill senior leadership: 
+    - Recommendation: widen the range of employees by including younger employees:
 
-        ![image of query for birthdates](https://github.com/EBolinVA/Pewlett-Hackard-Analysis/blob/main/Birthdates_after_1965.png)
+    - :exclamation: there are no employees in the database with a birth_date more recent than 1965-12-31
 
-    - choose mentorship by years of service
+    - A query of current employees born after 1955 is done with the following code and results in 167,666 employee records:
+
+    ```
+    SELECT DISTINCT ON(e.emp_no) e.emp_no,
+	    e.first_name, 
+	    e.last_name, 
+	    e.birth_date,
+	    e.hire_date,
+	    de.from_date,
+	    de.to_date, 
+	    t.title
+    FROM employees As e
+    LEFT JOIN dept_emp As de
+    ON e.emp_no = de.emp_no
+    INNER JOIN titles As t
+    ON e.emp_no = t.emp_no
+    GROUP BY e.emp_no, e.hire_date, de.from_date, de.to_date, e.birth_date, t.title
+    HAVING (de.to_date = '9999-01-01') AND (e.birth_date > '1955-12-31')
+    ORDER BY e.emp_no;
+    ```
+
+ - 167,666 current employees are younger than the retirement age employees. 
+    - Recommendations to expand mentorship pool:
+        * choose mentorship by years of service without limiting it to 1965 DOB
+        * create recent graduate pipeline to build up workforce
