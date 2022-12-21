@@ -95,10 +95,17 @@ The impending "silver tsunami" requires some planning to fill upcoming vacant po
 
 ### * How many employees are currently eligible to retire?
 
+- 72,458 employees are currently eligible to retire:
+![image of query and results for retirement eligible employees]()
+
 - It is unknown the date of this data pull for Pewlett Hackard. The analysis is done 4Q2022. 
 
-- The titles.csv file contains records for 240,124 unique current employees: 
+- The titles.csv file contains records for 240,124 unique current employees.
 
+- Join titles, dept_emp, and employees file to obtain current employees eligible to retire by birthdate between 1952 and 1955.
+
+
+### * How many employees are currently eligible for mentorship?
 - Employees eligible for mentorship are born in 1965. Expand the pool of employees in mentorship to fill senior leadership: 
     - widen the range of employees by including more birth years
         - Note: there are no employees in the database with a birth_date more recent than 1965-12-31
